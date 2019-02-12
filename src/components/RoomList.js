@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import * as firebase from 'firebase';
 import './../App.js';
 
 
@@ -24,6 +23,10 @@ export default class RoomList extends Component {
     e.preventDefault();
     this.roomsRef.push({ name: this.state.name });
     this.setState({ name: "" });
+  }
+
+  selectRoom(room) {
+    this.props.activeRoom(room);
   }
 
   componentDidMount() {
