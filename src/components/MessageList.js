@@ -5,7 +5,13 @@ import './../App.js';
 class MessageList extends Component {
   constructor(props) {
     super(props);
-      this.state = { messages: [], username: "", content: "", sentAt: "", roomId: "" };
+      this.state = {
+        messages: [],
+        username: "",
+        content: "",
+        sentAt: "",
+        roomId: ""
+      };
       this.messagesRef = this.props.firebase.database().ref('messages');
       this.handleChange = this.handleChange.bind(this);
       this.createMessage = this.createMessage.bind(this)
@@ -29,7 +35,12 @@ class MessageList extends Component {
       sentAt: this.state.sentAt,
       roomId: this.state.roomId
     });
-    this.setState({ username: "", content: "", sentAt: "", roomId: ""});
+    this.setState({
+      username: "",
+      content: "",
+      sentAt: "",
+      roomId: ""
+    });
   }
 
   componentDidMount() {
