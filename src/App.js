@@ -21,6 +21,8 @@ class App extends Component {
     this.activeRoom = this.activeRoom.bind(this);
   }
 
+
+
     activeRoom(room) {
       this.setState({ activeRoom: room });
     }
