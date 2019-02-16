@@ -26,7 +26,7 @@ class App extends Component {
     }
 
   render() {
-    const showMessage = this.state.activeRoom;
+    const showMessage = true;
 
     return (
       <div>
