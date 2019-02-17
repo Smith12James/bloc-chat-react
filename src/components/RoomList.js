@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './../App.js';
 
 
-export default class RoomList extends Component {
+class RoomList extends Component {
   constructor(props) {
     super(props);
       this.state = {
@@ -37,8 +37,6 @@ export default class RoomList extends Component {
     });
   }
 
-
-
   render() {
     const roomForm = (
       <form onSubmit={this.createRoom}>
@@ -48,7 +46,7 @@ export default class RoomList extends Component {
     );
 
     const roomList = this.state.rooms.map((room) =>
-      <li className="room-name" key={room.key}>{room.name}</li>
+      <li className="room-name" key={room.key} onClick={(e) => this.selectRoom(room, e)}>{room.name}</li>
     );
 
     return(
@@ -59,3 +57,5 @@ export default class RoomList extends Component {
     );
   }
 }
+
+export default RoomList;

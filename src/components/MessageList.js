@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
+import './User';
 import './../App.js';
 
 
 class MessageList extends Component {
   constructor(props) {
     super(props);
-      this.state = {
-        messages: [],
-        username: "",
-        content: "",
-        sentAt: "",
-        roomId: ""
-      };
+      this.state = { messages: [], username: "", content: "", sentAt: "", roomId: "" };
       this.messagesRef = this.props.firebase.database().ref('messages');
       this.handleChange = this.handleChange.bind(this);
       this.createMessage = this.createMessage.bind(this)
@@ -20,7 +15,7 @@ class MessageList extends Component {
   handleChange(e) {
     e.preventDefault();
     this.setState({
-      username: "user",
+      username: this.props.user,
       content: e.target.value,
       sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
       roomId: this.props.activeRoom
@@ -39,8 +34,7 @@ class MessageList extends Component {
       username: "",
       content: "",
       sentAt: "",
-      roomId: ""
-    });
+      roomId: "" });
   }
 
   componentDidMount() {
@@ -52,7 +46,7 @@ class MessageList extends Component {
   }
 
   render() {
-    const activeRoom = console.log(this.props.activeRoom);
+    const activeRoom = this.props.activeRoom;
 
     const messageBar = (
       <form onSubmit={this.createMessage}>
@@ -63,7 +57,10 @@ class MessageList extends Component {
 
     const messageList = (
       this.state.messages.map((message) => {
-          return <li key={message.key}><h3>{message.username}:</h3>{message.content}</li>
+        if (message.roomId === activeRoom) {
+          return <li key={message.key}>{message.username}: {message.content}</li>
+        }
+        return null;
       })
     );
 
