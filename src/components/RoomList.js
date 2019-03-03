@@ -46,11 +46,11 @@ class RoomList extends Component {
     );
 
     const roomList = this.state.rooms.map((room) =>
-      <li className="room-name" key={room.key} onClick={(e) => this.selectRoom(room, e)}>{room.name}</li>
+      <ul className="list-group list-group-flush"><li className="list-group-item" key={room.key} onClick={(e) => this.selectRoom(room, e)}>{room.name}</li></ul>
     );
 
     return(
-      <div className="chat-rooms">
+      <div>
         <div className="room-form">{roomForm}</div>
         <ul className="room-list">{roomList}</ul>
       </div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import * as firebase from 'firebase';
 import RoomList from './components/RoomList';
 import MessageList from './components/MessageList';
@@ -43,15 +43,20 @@ class App extends Component {
     const currentUser = this.state.user === null? "Guest" : this.state.user.displayName;
 
     return (
-      <div>
-        <h1>{this.state.activeRoom.name || "Select A Room"}</h1>
-        <RoomList firebase={firebase} activeRoom={this.activeRoom} />
-        <div>{currentUser}</div>
-        <User firebase={firebase} setUser={this.setUser} />
-        { showMessage ?
-        (<MessageList firebase={firebase} activeRoom={this.state.activeRoom.key} user={currentUser} />)
-        : (null)
-        }
+      <div className="container-fluid">
+        <div className="row">
+          <h1 className="col-9 display-4 text-light">{this.state.activeRoom.name || "Select A Room"}</h1>
+          <div className ="col-3 text-align-right text-light">{currentUser}
+            <User firebase={firebase} setUser={this.setUser} />
+          </div>
+        </div>
+        <div className="row">
+          <RoomList className="col-4" firebase={firebase} activeRoom={this.activeRoom} />
+          { showMessage ?
+          (<MessageList className="col-8" firebase={firebase} activeRoom={this.state.activeRoom.key} user={currentUser} />)
+          : (null)
+          }
+        </div>
       </div>
     );
   }

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './User';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import App from './../App.js';
 
 
@@ -54,15 +56,22 @@ class MessageList extends Component {
 
     const messageBar = (
       <form onSubmit={this.createMessage}>
-        <input type="text" value={this.state.content} placeholder="Enter Message" onChange={this.handleChange} />
-        <input type="submit" value="Send" />
+        <div className="form-group">
+          <textarea className="form-control" type="text" value={this.state.content} placeholder="Enter Message" onChange={this.handleChange}></textarea>
+        </div>
+        <div>
+          <input className="btn btn-primary" type="submit" value="Send" />
+        </div>
       </form>
     );
 
     const messageList = (
       this.state.messages.map((message) => {
         if (message.roomId === activeRoom) {
-          return <li key={message.key}>{message.username}: {message.content}</li>
+          return <div className="card text-white bg-secondary mb-3">
+            <div className="card-header">{message.username}:</div>
+            <p className="card-text" key={message.key}> {message.content}</p>
+          </div>
         }
         return null;
       })
@@ -70,8 +79,8 @@ class MessageList extends Component {
 
     return (
       <div>
-        <div>{messageBar}</div>
         <div>{messageList}</div>
+        <div>{messageBar}</div>
       </div>
     );
   }
